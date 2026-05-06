@@ -11,18 +11,25 @@ parameters:
 jobs:
 - job: test_v1
   condition: eq('${{ parameters.job_to_run }}', 'test_v1')
+  # Added release parameter to pin macOS-latest to r2025b because r2026a and later
+  # do not support intel macOS. Remove when Azure DevOps supports Apple Silicon
   strategy:
     matrix:
       linux:
         imageName: 'ubuntu-latest'
+        release: latest
       mac:
         imageName: 'macOS-latest'
+        release: r2025b
       windows:
         imageName: 'windows-latest'
+        release: latest
   pool:
     vmImage: $(imageName)
   steps:
   - task: InstallMATLAB@1
+    inputs:
+      release: $(release)
   - task: RunMATLABTests@1
     inputs: 
       sourceFolder: tests
