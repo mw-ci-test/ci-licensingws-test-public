@@ -23,7 +23,7 @@ jobs:
       MATHWORKS_LICENSING_ENDPOINT: ${{ github.event.inputs.endpoint }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Display endpoint for debugging
         run: echo $MATHWORKS_LICENSING_ENDPOINT
@@ -47,10 +47,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      
+
       - name: Display endpoint for debugging
         run: echo $MATHWORKS_LICENSING_ENDPOINT
-      
+
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1
 
